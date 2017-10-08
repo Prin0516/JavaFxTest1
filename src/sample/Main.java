@@ -1,6 +1,5 @@
 package sample;
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,8 +16,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
+//
 
-//        initRootLayout();
+        getPrimaryStage();
+        initRootLayout();
 
         showPersonOverview();
     }
