@@ -18,7 +18,7 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
 
-        initRootLayout();
+//        initRootLayout();
 
         showPersonOverview();
     }
@@ -49,7 +49,7 @@ public class Main extends Application {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("PersonOverview.fxml"));
+            loader.setLocation(Main.class.getResource("sample.fxml"));
             AnchorPane personOverview = (AnchorPane) loader.load();
 
             // Set person overview into the center of root layout.
