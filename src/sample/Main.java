@@ -10,7 +10,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Person>personData=FXCollections.observableArrayList();
@@ -24,7 +23,6 @@ public class Main extends Application {
         personData.add(new Person("Anna","Best"));
         personData.add(new Person("Stefan","Meier"));
         personData.add(new Person("Martin","Mueller"));
-
     }
     public ObservableList<Person> getPersonData(){
         return personData;
@@ -70,7 +68,6 @@ public class Main extends Application {
 
             // Set person overview into the center of root layout.
             rootLayout.setCenter(personOverview);
-
             PersonOverviewController controller=loader.getController();
             controller.setMainApp(this);
         } catch (IOException e) {

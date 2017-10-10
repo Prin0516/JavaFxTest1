@@ -9,9 +9,9 @@ public class PersonOverviewController {
     @FXML
     private TableView<Person> personTable;
     @FXML
-    private TableColumn<Person,String> firstNameColumn;
+    private TableColumn<Person, String> firstNameColumn;
     @FXML
-    private TableColumn<Person,String>lastNameColumn;
+    private TableColumn<Person, String> lastNameColumn;
     @FXML
     private Label firstNameLabel;
     @FXML
@@ -24,17 +24,37 @@ public class PersonOverviewController {
     private Label cityLabel;
     @FXML
     private Label birthdayLabel;
-    @FXML
-    private Main main;
-    public PersonOverviewController(){
+
+    // Reference to the main application.
+    private Main mainApp;
+
+    /**
+     * The constructor.
+     * The constructor is called before the initialize() method.
+     */
+    public PersonOverviewController() {
     }
 
-    private void initialize(){
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
+    @FXML
+    private void initialize() {
+        // Initialize the person table with the two columns.
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
     }
-    public void setMainApp(Main main){
-        this.main=main;
-        personTable.setItems(main.getPersonData());
+
+    /**
+     * Is called by the main application to give a reference back to itself.
+     *
+     * @param mainApp
+     */
+    public void setMainApp(Main mainApp) {
+        this.mainApp = mainApp;
+
+        // Add observable list data to the table
+        personTable.setItems(mainApp.getPersonData());
     }
 }
