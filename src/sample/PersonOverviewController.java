@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.controlsfx.dialog.Dialogs;
 
 public class PersonOverviewController {
     @FXML
@@ -48,7 +49,7 @@ public class PersonOverviewController {
         showPersonDetails(null);
 
         personTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable,oldValue,newValue) -> showPersonDetails(newValue));
+                (observable, oldValue, newValue) -> showPersonDetails(newValue));
     }
 
     /**
@@ -62,15 +63,16 @@ public class PersonOverviewController {
         // Add observable list data to the table
         personTable.setItems(mainApp.getPersonData());
     }
-    private void showPersonDetails(Person person){
-        if(person!=null){
+    @FXML
+    private void showPersonDetails(Person person) {
+        if (person != null) {
             firstNameLabel.setText(person.getFirstName());
             lastNameLabel.setText(person.getLastName());
             streetLabel.setText(person.getStreet());
             postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
             cityLabel.setText(person.getCity());
             birthdayLabel.setText(DataUtil.format(person.getBirthday()));
-        }else{
+        } else {
             firstNameLabel.setText("");
             lastNameLabel.setText("");
             streetLabel.setText("");
@@ -79,9 +81,19 @@ public class PersonOverviewController {
             birthdayLabel.setText("");
         }
     }
+
     @FXML
-    private void handleDeletePerson(){
-        int selectedIndex=personTable.getSelectionModel().getSelectedIndex();
-        personTable.getItems().remove(selectedIndex);
+    private void handleDeletePerson() {
+        int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            personTable.getItems().remove(selectedIndex);
+        } else {
+            // Nothing selected.
+            Dialogs.create()
+                    .title("No Selection")
+                    .masthead("No Person Selected")
+                    .message("Please select a person in the table.")
+                    .showWarning();
+        }
     }
 }
