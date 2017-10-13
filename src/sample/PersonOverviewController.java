@@ -4,7 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import org.controlsfx.dialog.Dialogs;
+
 
 public class PersonOverviewController {
     @FXML
@@ -85,15 +87,43 @@ public class PersonOverviewController {
     @FXML
     private void handleDeletePerson() {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
+        // Nothing selected.
+//            Dialogs.create()
+//                    .title("No Selection")
+//                    .masthead("No Person Selected")
+//                    .message("Please select a person in the table.")
+//                    .showWarning();
         if (selectedIndex >= 0) {
             personTable.getItems().remove(selectedIndex);
         } else {
-            // Nothing selected.
+            Dialogs.showWarningDialog(this, "Careful with the next step!", "Warning Dialog", "title");
+        }
+    }
+
+    @FXML
+    private void handleNewPerson(){
+        Person tempPerson=new Person();
+        boolean okClicked= mainApp.showPersonEditDialog(tempPerson);
+        if(okClicked){
+            mainApp.getPersonData().add(tempPerson);
+        }
+    }
+    @FXML
+    private void handleEditPerson(){
+        Person selectedPerson=personTable.getSelectionModel().getSelectedItem();
+        if(selectedPerson!=null){
+            boolean okClicked= mainApp.showPersonEditDialog(selectedPerson);
+            if(okClicked){
+                showPersonDetails(selectedPerson);
+            }
+        }else{
             Dialogs.create()
                     .title("No Selection")
                     .masthead("No Person Selected")
                     .message("Please select a person in the table.")
                     .showWarning();
         }
+
+
     }
 }

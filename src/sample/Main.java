@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -32,9 +33,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
-        getPrimaryStage();
         initRootLayout();
         showPersonOverview();
+        getPrimaryStage();
     }
 
     /**
@@ -74,6 +75,32 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
+    }
+
+    public boolean showPersonEditDialog(Person person){
+        try{
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(Main.class.getResource("PersonEditDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage=new Stage();
+            dialogStage.setTitle("Edit Person");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene=new Scene(page);
+            dialogStage.setScene(scene);
+
+            PersonEditDialogController controller=loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setPerson(person);
+
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

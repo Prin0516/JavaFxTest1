@@ -53,8 +53,8 @@
                         <Label fx:id="firstNameLabel" text="Label" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <Button layoutX="208.0" layoutY="260.0" mnemonicParsing="false" text="new" />
-                  <Button layoutX="276.0" layoutY="260.0" mnemonicParsing="false" text="Edit" />
+                  <Button layoutX="208.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleNewPerson" text="new" />
+                  <Button layoutX="276.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit" />
                   <Button layoutX="344.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
                </children>
             </AnchorPane>
