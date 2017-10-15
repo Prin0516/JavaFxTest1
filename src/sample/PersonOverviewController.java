@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
 import org.controlsfx.dialog.Dialogs;
 
 
@@ -96,7 +95,6 @@ public class PersonOverviewController {
         if (selectedIndex >= 0) {
             personTable.getItems().remove(selectedIndex);
         } else {
-            Dialogs.showWarningDialog(this, "Careful with the next step!", "Warning Dialog", "title");
         }
     }
 
